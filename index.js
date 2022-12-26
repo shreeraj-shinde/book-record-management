@@ -116,6 +116,31 @@ app.put("/users/:id", (req, res) => {
   });
 });
 
+/**
+ * Route : /users/:id
+ * Method : PUT
+ * Description : Delete user by id
+ * Access : Public
+ * Parameters : id
+ */
+
+app.delete("/users/:id", (req, res) => {
+  const { id } = req.params;
+  const user = users.find((each) => each.id === id);
+  if (!user) {
+    return res.status(404).send({
+      messege: "User Not Found",
+    });
+  }
+  index = users.indexOf(user);
+  users.splice(index, 1);
+
+  return res.status(200).send({
+    Sucess: "True",
+    data: users,
+  });
+});
+
 app.all("/", (req, res) => {
   res.status(404).send({
     "": "Not Found",
