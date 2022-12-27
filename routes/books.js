@@ -41,6 +41,24 @@ router.get("/:id", (req, res) => {
 });
 
 /**
+ * Route : /books/
+ * Method : POST
+ * Description : ADD new book
+ * Access : Public
+ * Parameters : data
+ */
+router.post("/", (req, res) => {
+  const { data } = req.body;
+  if (!data) {
+    return res
+      .status(404)
+      .send({ Sucess: "False", messege: "No Data Provided" });
+  }
+  books.push(data);
+  return res.status(202).send({ Sucess: "True", data: books });
+});
+
+/**
  * Route : /books/:id
  * Method : PUT
  * Description : Update book data

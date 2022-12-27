@@ -43,6 +43,24 @@ router.get("/:id", (req, res) => {
 
 /**
  * Route : /users/:id
+ * Method : POST
+ * Description : Update user data
+ * Access : Public
+ * Parameters : id
+ */
+router.post("/", (req, res) => {
+  const { data } = req.body;
+  if (!data) {
+    return res
+      .status(404)
+      .send({ Sucess: "False", messege: "No Data Provided" });
+  }
+  users.push(data);
+  return res.status(202).send({ Sucess: "True", data: users });
+});
+
+/**
+ * Route : /users/:id
  * Method : PUT
  * Description : Update user data
  * Access : Public
