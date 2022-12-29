@@ -1,11 +1,14 @@
 const express = require("express");
-
+const dotenv = require("dotenv");
 const { users } = require("./data/users.json");
-
+// Database connections
+const Dbconnection = require("./databaseConnection");
 // Importing Routes
 const userRouter = require("./routes/users");
 const bookRouter = require("./routes/books");
+dotenv.config();
 const app = express();
+Dbconnection();
 
 const port = 8081;
 
