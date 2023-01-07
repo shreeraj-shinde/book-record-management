@@ -1,4 +1,5 @@
 const express = require("express");
+const { getAllBooks } = require("../controllers/books-control");
 
 const { books } = require("../data/books.json");
 const { users } = require("../data/users.json");
@@ -11,12 +12,7 @@ const router = express.Router();
  * Access : Public
  * Parameters : None
  */
-router.get("/", (req, res) => {
-  res.status(200).send({
-    sucess: "True",
-    data: books,
-  });
-});
+router.get("/", getAllBooks);
 
 /**
  * Route : /books/id
@@ -116,7 +112,7 @@ router.get("/issued/by-user", (req, res) => {
     });
   }
   return res.status(200).send({
-    Sucess: "True",
+    Success: "True",
     message: IssuedBooks,
   });
 });
