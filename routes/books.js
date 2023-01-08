@@ -3,6 +3,9 @@ const {
   getAllBooks,
   getSingleBookByID,
   getAllIssuedBooks,
+  CreateNewBook,
+  UpdateBookById,
+  getBookByName,
 } = require("../controllers/books-control");
 
 const { books } = require("../data/books.json");
@@ -28,6 +31,8 @@ router.get("/", getAllBooks);
  */
 router.get("/:id", getSingleBookByID);
 
+router.get("/getbook/:name", getBookByName);
+
 /**
  * Route : /books/
  * Method : POST
@@ -35,16 +40,7 @@ router.get("/:id", getSingleBookByID);
  * Access : Public
  * Parameters : data
  */
-router.post("/", (req, res) => {
-  const { data } = req.body;
-  if (!data) {
-    return res
-      .status(404)
-      .send({ Sucess: "False", messege: "No Data Provided" });
-  }
-  books.push(data);
-  return res.status(202).send({ Sucess: "True", data: books });
-});
+router.post("/", CreateNewBook);
 
 /**
  * Route : /books/:id
@@ -53,31 +49,11 @@ router.post("/", (req, res) => {
  * Access : Public
  * Parameters : id
  */
-router.put("/:id", (req, res) => {
-  const { id } = req.params;
-  const { data } = req.body;
-  const book = books.find((each) => each.id === id);
-  if (!book) {
-    return res.status(404).send({
-      sucess: "False",
-      messege: "Book not Found",
-    });
-  }
-  const updatedBook = books.map((each) => {
-    if (each.id === id) {
-      return {
-        ...each,
-        ...data,
-      };
-    }
-    return each;
-  });
-  res.status(200).json({ sucess: "True", data: { ...books, ...updatedBook } });
-});
+router.put("/:id", UpdateBookById);
 
 /**
  * Route : /books/issued/books
- * Method : GET
+ * Method : PUT
  * Description : Get issued book details
  * Access : Public
  * Parameters : None
