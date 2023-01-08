@@ -45,6 +45,6 @@ exports.UpdateUserByID = async (req, res) => {
     data,
     { new: true }
   );
-  users = await UserModel.find();
-  res.status(200).json({ Success: "True", data: users });
+  console.log(updatedUser);
+  res.status(200).json({ Success: "True", data: updatedUser });
 };
