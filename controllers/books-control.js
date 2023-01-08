@@ -1,5 +1,5 @@
 const { BookModel, UserModel } = require("../models");
-const booksModels = require("../models/books-models");
+
 const IssuedBook = require("../dtos/book-dtos");
 exports.getAllBooks = async (req, res) => {
   const Books = await BookModel.find();
