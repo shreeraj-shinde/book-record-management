@@ -86,3 +86,10 @@ exports.UpdateBookById = async (req, res) => {
   });
   res.status(200).json({ sucess: "True", data: updatedBook });
 };
+
+exports.deleteBookById = async (req, res) => {
+  const { id } = req.params;
+  await BookModel.findOneAndRemove({ _id: id });
+  const books = BookModel.find();
+  res.status(200).send({ Success: "True", Data: books });
+};
