@@ -6,6 +6,7 @@ const {
   CreateNewBook,
   UpdateBookById,
   getBookByName,
+  deleteBookById,
 } = require("../controllers/books-control");
 
 const { books } = require("../data/books.json");
@@ -60,4 +61,5 @@ router.put("/:id", UpdateBookById);
  */
 router.get("/issued/by-user", getAllIssuedBooks);
 
+router.delete("/:id", deleteBookById);
 module.exports = router;

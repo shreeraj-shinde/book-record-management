@@ -48,3 +48,12 @@ exports.UpdateUserByID = async (req, res) => {
   console.log(updatedUser);
   res.status(200).json({ Success: "True", data: updatedUser });
 };
+
+exports.deleteUserByID = async (req, res) => {
+  const { id } = req.params;
+
+  await UserModel.findByIdAndRemove(id);
+  const users = await UserModel.find();
+
+  res.status(200).json({ Success: true, data: users });
+};

@@ -89,7 +89,7 @@ exports.UpdateBookById = async (req, res) => {
 
 exports.deleteBookById = async (req, res) => {
   const { id } = req.params;
-  await BookModel.findOneAndRemove({ _id: id });
+  await BookModel.findByIdAndRemove(id);
   const books = BookModel.find();
   res.status(200).send({ Success: "True", Data: books });
 };
