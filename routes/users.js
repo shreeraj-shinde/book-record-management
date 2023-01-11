@@ -7,6 +7,7 @@ const {
   getUserByID,
   UpdateUserByID,
   CreatenewUser,
+  deleteUserByID,
 } = require("../controllers/users-control");
 
 const router = express.Router();
@@ -56,22 +57,7 @@ router.put("/:id", UpdateUserByID);
  * Parameters : id
  */
 
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  const user = users.find((each) => each.id === id);
-  if (!user) {
-    return res.status(404).send({
-      messege: "User Not Found",
-    });
-  }
-  index = users.indexOf(user);
-  users.splice(index, 1);
-
-  return res.status(200).send({
-    Sucess: "True",
-    data: users,
-  });
-});
+router.delete("/:id", deleteUserByID);
 
 /**
  * Route : /users/subscription-details/:id
